@@ -130,7 +130,7 @@ target_link_libraries(${PROJECT_NAME}_raisim_PDOnly PUBLIC
     raisim::raisimOgre
 
 )
-target_compile_definitions(${PROJECT_NAME}_raisim_PDOnly PRIVATE "-DEXAMPLE_ROBOT_RESOURCE_DIR=/home/bmtsz/ocs2_ws/src/raisimOgre/examples/rsc/")
+target_compile_definitions(${PROJECT_NAME}_raisim_PDOnly PRIVATE "-DEXAMPLE_ROBOT_RESOURCE_DIR=${CMAKE_CURRENT_SOURCE_DIR}/../../../raisimOgre/examples/rsc/")
 
 add_executable(${PROJECT_NAME}_raisim_PDOnly_tele
   src/raisim_PDOnly_tele.cpp
@@ -142,7 +142,7 @@ target_link_libraries(${PROJECT_NAME}_raisim_PDOnly_tele PUBLIC
     raisim::raisimOgre
 
 )
-target_compile_definitions(${PROJECT_NAME}_raisim_PDOnly_tele PRIVATE "-DEXAMPLE_ROBOT_RESOURCE_DIR=/home/bmtsz/ocs2_ws/src/raisimOgre/examples/rsc/")
+target_compile_definitions(${PROJECT_NAME}_raisim_PDOnly_tele PRIVATE "-DEXAMPLE_ROBOT_RESOURCE_DIR=${CMAKE_CURRENT_SOURCE_DIR}/../../../raisimOgre/examples/rsc/")
 
 #########################
 ###   CLANG TOOLING   ###

@@ -25,6 +25,7 @@ find_package(Eigen3 3.3 REQUIRED NO_MODULE)
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(pinocchio REQUIRED pinocchio)
 
+# Please comment this line if you don't have eigen version problem. If you want to use it, you need to change the eigen include path
 set(pinocchio_INCLUDE_DIRS "/home/bmtsz/ocs2_ws/devel/include;/opt/ros/noetic/include;/usr/include/eigen3")
 # message(${pinocchio_INCLUDE_DIRS})
 
