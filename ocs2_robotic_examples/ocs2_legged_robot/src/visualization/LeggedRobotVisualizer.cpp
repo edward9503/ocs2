@@ -46,6 +46,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 // Additional messages not in the helpers file
 #include <geometry_msgs/PoseArray.h>
 #include <visualization_msgs/MarkerArray.h>
+#include <ocs2_msgs/raisim_PD_timeStampAndJoints.h>
 
 // URDF related
 #include <urdf/model.h>
@@ -81,6 +82,7 @@ void LeggedRobotVisualizer::launchVisualizerNode(ros::NodeHandle& nodeHandle) {
   costDesiredFeetPositionPublishers_[3] = nodeHandle.advertise<visualization_msgs::Marker>("/legged_robot/desiredFeetTrajectory/RH", 1);
   stateOptimizedPublisher_ = nodeHandle.advertise<visualization_msgs::MarkerArray>("/legged_robot/optimizedStateTrajectory", 1);
   currentStatePublisher_ = nodeHandle.advertise<visualization_msgs::MarkerArray>("/legged_robot/currentState", 1);
+  jointsPublisher_ = nodeHandle.advertise<ocs2_msgs::raisim_PD_timeStampAndJoints>("/legged_robot/PDJoints", 1);
 
   // Load URDF model
   urdf::Model urdfModel;
@@ -110,6 +112,7 @@ void LeggedRobotVisualizer::update(const SystemObservation& observation, const P
     publishDesiredTrajectory(timeStamp, command.mpcTargetTrajectories_);
     publishOptimizedStateTrajectory(timeStamp, primalSolution.timeTrajectory_, primalSolution.stateTrajectory_,
                                     primalSolution.modeSchedule_);
+    std::cout << "Time: " << timeStamp << "\n" << std::endl;                                
     lastTime_ = observation.time;
   }
 }
@@ -133,6 +136,11 @@ void LeggedRobotVisualizer::publishObservation(ros::Time timeStamp, const System
   publishJointTransforms(timeStamp, qJoints);
   publishBaseTransform(timeStamp, basePose);
   publishCartesianMarkers(timeStamp, modeNumber2StanceLeg(observation.mode), feetPositions, feetForces);
+
+  ocs2_msgs::raisim_PD_timeStampAndJoints raisim_data;
+  raisim_data.timeStamp = timeStamp;
+  Eigen::Map<vector_t>(raisim_data.joints.data(), qJoints.rows(), qJoints.cols()) = qJoints;
+  jointsPublisher_.publish(raisim_data);
 }
 
 /******************************************************************************************************/

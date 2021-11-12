@@ -26,6 +26,8 @@ pkg_check_modules(hpp-fcl REQUIRED hpp-fcl)
 
 find_package(Eigen3 3.3 REQUIRED NO_MODULE)
 
+set(pinocchio_INCLUDE_DIRS "/home/bmtsz/ocs2_ws/devel/include;/opt/ros/noetic/include;/usr/include/eigen3")
+
 ###################################
 ## catkin specific configuration ##
 ###################################

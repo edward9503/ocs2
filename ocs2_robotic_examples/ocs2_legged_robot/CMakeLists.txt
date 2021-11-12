@@ -34,6 +34,8 @@ find_package(PkgConfig REQUIRED)
 pkg_check_modules(pinocchio REQUIRED pinocchio)
 find_package(Eigen3 3.3 REQUIRED NO_MODULE)
 
+set(pinocchio_INCLUDE_DIRS "/home/bmtsz/ocs2_ws/devel/include;/opt/ros/noetic/include;/usr/include/eigen3")
+
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread -fopenmp -std=c++11 -Wfatal-errors -Wl,--no-as-needed")
 
 ###################################

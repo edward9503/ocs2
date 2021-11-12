@@ -103,6 +103,9 @@ class LeggedRobotVisualizer : public DummyObserver {
 
   ros::Publisher currentStatePublisher_;
 
+  ros::Publisher jointsPublisher_;
+
+
   scalar_t lastTime_;
   scalar_t minPublishTimeDifference_;
 };

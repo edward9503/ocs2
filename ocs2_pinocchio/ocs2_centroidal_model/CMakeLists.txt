@@ -25,6 +25,9 @@ find_package(Eigen3 3.3 REQUIRED NO_MODULE)
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(pinocchio REQUIRED pinocchio)
 
+set(pinocchio_INCLUDE_DIRS "/home/bmtsz/ocs2_ws/devel/include;/opt/ros/noetic/include;/usr/include/eigen3")
+# message(${pinocchio_INCLUDE_DIRS})
+
 ###################################
 ## catkin specific configuration ##
 ###################################
